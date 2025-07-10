@@ -15,6 +15,8 @@ namespace Ders26_Api.Data
         {
             optionsBuilder.UseSqlServer(@"
                 Server=SINAN\MSSQLSERVER01;
+
+                Server=burası değiştirildi;
                 DataBase=AlisVerisApi;
                 Trusted_Connection=True;
                 TrustServerCertificate=True;
