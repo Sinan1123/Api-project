@@ -24,6 +24,7 @@ namespace Ders26_Api.Controllers
         {
             var client = _httpClientFactory.CreateClient();
             var response = await client.GetFromJsonAsync<DummyUserResponse>("https://dummyjson.com/users");
+            var response = await client.GetFromJsonAsync<DummyUserResponse>(url);
 
             if (response?.Users == null || !response.Users.Any())
                 return BadRequest("Veri alınamadı.");
