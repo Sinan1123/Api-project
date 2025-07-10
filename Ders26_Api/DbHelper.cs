@@ -68,5 +68,13 @@ namespace Ders26_Api
             return $"{yeniKullanicilar.Count} kullanıcı eklendi.";
         }
         #endregion
+
+        #region Kullanici
+        public Kullanici GetKullaniciFromDbHelper(int kullaniciId)
+        {
+            //return _db.Kullanicilar.Find(kullaniciId);
+            return _db.Kullanicilar.Where(p => p.Id == kullaniciId).First();
+        }
+        #endregion
     }
 }

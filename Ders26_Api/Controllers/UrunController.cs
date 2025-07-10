@@ -8,14 +8,14 @@ namespace Ders26_Api.Controllers
     [Route("[controller]/[action]")]
     public class UrunController : ControllerBase
     {
-        [HttpGet]
+        [HttpGet] // veri çekmek için
         public List<Urun> GetUrunler()
         {
             DbHelper dbHelper = new DbHelper();
             var urunler = dbHelper.UrunleriListele();
             return urunler;
         }
-        [HttpPost]
+        [HttpPost] // veri kaydetmek için
         public string UrunKaydet(Urun data)
         {
             DbHelper dbHelper = new DbHelper();
@@ -48,6 +48,9 @@ namespace Ders26_Api.Controllers
             var kategoriler = dbhelper.UrunKategorileriListele();
             return kategoriler;
         }
+
+
+
         [HttpGet("{kategoriId}/{no}")]
         public string GetKategoriName(int kategoriId,string no)
         {
@@ -55,6 +58,8 @@ namespace Ders26_Api.Controllers
             var sonuc = dbhelper.GetKategoriAdi(kategoriId);
             return sonuc;
         }
+
+
         [HttpGet]
         public UrunKategori GetKategori(int kategoriId)
         {
@@ -62,5 +67,8 @@ namespace Ders26_Api.Controllers
             var sonuc = dbhelper.GetKategori(kategoriId);
             return sonuc;
         }
+
+
+
     }
 }

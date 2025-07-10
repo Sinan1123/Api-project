@@ -23,22 +23,22 @@ namespace Ders26_Api.Controllers
         public async Task<IActionResult> ImportDummyKullanicilar()
         {
             var client = _httpClientFactory.CreateClient();
-            var response = await client.GetFromJsonAsync<DummyUserResponse>("https://dummyjson.com/users");
+            var url = "https://dummyjson.com/users";
             var response = await client.GetFromJsonAsync<DummyUserResponse>(url);
 
             if (response?.Users == null || !response.Users.Any())
                 return BadRequest("Veri alınamadı.");
 
-            var yeniKullanicilar = response.Users
-                .Where(dummy => !_db.Kullanicilar.Any(k => k.Email == dummy.Email))
-                .Select(dummy => new Kullanici
-                {
-                    AdSoyad = $"{dummy.FirstName} {dummy.LastName}",
-                    Email = dummy.Email,
-                    Sifre = dummy.Password,
-                    OlusturulmaTarihi = DateTime.Now
-                })
-                .ToList();
+            List<Kullanici> yeniKullanicilar = response.Users
+                 .Where(dummy => !_db.Kullanicilar.Any(k => k.Email == dummy.Email))
+                 .Select(dummy => new Kullanici
+                 {
+                     AdSoyad = $"{dummy.FirstName} {dummy.LastName}",
+                     Email = dummy.Email,
+                     Sifre = dummy.Password,
+                     OlusturulmaTarihi = DateTime.Now
+                 })
+                 .ToList();
 
             _db.Kullanicilar.AddRange(yeniKullanicilar);
             await _db.SaveChangesAsync();
