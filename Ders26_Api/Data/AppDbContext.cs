@@ -14,7 +14,7 @@ namespace Ders26_Api.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"
-                Server=localhost;
+                Server=SINAN\MSSQLSERVER01;
                 DataBase=AlisVerisApi;
                 Trusted_Connection=True;
                 TrustServerCertificate=True;
