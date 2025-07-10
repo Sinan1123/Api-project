@@ -8,14 +8,25 @@ namespace Ders26_Api.Controllers
     [Route("[controller]/[action]")]
     public class UrunController : ControllerBase
     {
-        [HttpGet] // veri çekmek için
-        public List<Urun> GetUrunler()
-        {
-            DbHelper dbHelper = new DbHelper();
-            var urunler = dbHelper.UrunleriListele();
-            return urunler;
-        }
-        [HttpPost] // veri kaydetmek için
+        #region urun
+        //[HttpGet] // veri çekmek için
+        //public List<Urun> GetUrunler()
+        //{
+        //    DbHelper dbHelper = new DbHelper();
+        //    var urunler = dbHelper.UrunleriListele();
+        //    return urunler;
+        //}
+        //[HttpPost] // veri kaydetmek için
+        //public string UrunKaydet(Urun data)
+        //{
+        //    DbHelper dbHelper = new DbHelper();
+        //    var sonuc = dbHelper.UrunEkle(data);
+        //    return sonuc;
+        //}
+        #endregion
+
+        // URUNLER
+        [HttpPost]
         public string UrunKaydet(Urun data)
         {
             DbHelper dbHelper = new DbHelper();
@@ -23,51 +34,29 @@ namespace Ders26_Api.Controllers
             return sonuc;
         }
 
+        // parametre olarak id alalım
+        // geriye o id yi döndürelim
 
-        // KATEGORILER
-        [HttpPost]
-        public string KategoriKaydet(UrunKategori data)
+        [HttpGet]
+        public Urun GetUrun(int urunId)
         {
             DbHelper dbHelper = new DbHelper();
-
-            UrunKategori kategori = new UrunKategori();
-            kategori.Adi = data.Adi;
-            kategori.Aciklama = data.Aciklama;
-            kategori.Sira = data.Sira;
-            kategori.IsPassive = data.IsPassive;
-            kategori.KategoriNo = data.KategoriNo;
-
-            var sonuc = dbHelper.KategoriEkle(data);
-            return sonuc;
+            return dbHelper.UrunBul(urunId);
         }
-
-        [HttpGet]
-        public List<UrunKategori> GetKategoriler()
+        [HttpPut]
+        public string UpdateProduct(dtoUrunUpdateRequest veri)
         {
-            DbHelper dbhelper = new DbHelper();
-            var kategoriler = dbhelper.UrunKategorileriListele();
-            return kategoriler;
+            DbHelper dbHelper = new DbHelper();
+            return dbHelper.ProductUpdate(veri);
         }
 
 
-
-        [HttpGet("{kategoriId}/{no}")]
-        public string GetKategoriName(int kategoriId,string no)
+        [HttpPost]
+        public string BosVeri()
         {
-            DbHelper dbhelper = new DbHelper();
-            var sonuc = dbhelper.GetKategoriAdi(kategoriId);
-            return sonuc;
+            return "çalıştı";
         }
-
-
-        [HttpGet]
-        public UrunKategori GetKategori(int kategoriId)
-        {
-            DbHelper dbhelper = new DbHelper();
-            var sonuc = dbhelper.GetKategori(kategoriId);
-            return sonuc;
-        }
-
+      
 
 
     }

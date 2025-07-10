@@ -1,5 +1,7 @@
 ﻿using Ders26_Api.Data;
+using Ders26_Api.DTOs;
 using Ders26_Api.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Ders26_Api
 {
@@ -8,17 +10,45 @@ namespace Ders26_Api
         private AppDbContext _db = new AppDbContext();
 
         #region Urun
-        public List<Urun> UrunleriListele()
-        {
-            return _db.Urunler.ToList();
-        }
+        //public List<Urun> UrunleriListele()
+        //{
+        //    return _db.Urunler.ToList();
+        //}
+        //public string UrunEkle(Urun data)
+        //{
+        //    _db.Urunler.Add(data);
+        //    _db.SaveChanges();
+        //    return $"{data.Adi} başarıyla eklendi";
+        //}
+        #endregion
+
         public string UrunEkle(Urun data)
         {
             _db.Urunler.Add(data);
             _db.SaveChanges();
-            return $"{data.Adi} başarıyla eklendi";
+            return $"{data.Adi} eklendi";
         }
-        #endregion
+
+        public Urun UrunBul(int urunId)
+        {
+            return _db.Urunler
+                .Include(p => p.Kategori)
+                .Where(p => p.Id == urunId)
+                .First();
+        }
+
+        // urun id+Adi+birim fiyatı gelecek
+        // bu bilgiler ile id den urunu bulup
+        // urunun adı ve birim fiyatını güncelleyeceğiz
+        public string ProductUpdate(dtoUrunUpdateRequest veri)
+        {
+            var sonuc = _db.Urunler.Where(p => p.Id == veri.Id).FirstOrDefault();
+            sonuc.Adi = veri.Ad;
+            sonuc.BirimFiyat = veri.BirimFiyat;
+            _db.SaveChanges();
+            return $"{sonuc.Adi}'nın birim fiyatı {sonuc.BirimFiyat} olarak başarıyla güncellendi";
+        }
+
 
         #region Urun Kategorileri
         public string KategoriEkle(UrunKategori data)
