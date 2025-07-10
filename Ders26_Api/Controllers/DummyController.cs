@@ -13,6 +13,7 @@ namespace Ders26_Api.Controllers
         private readonly AppDbContext _db;
         private readonly IHttpClientFactory _httpClientFactory;
         // burası deneme satırı
+        // string buraya bişeyler yazdım
         public DummyController(AppDbContext db, IHttpClientFactory httpClientFactory)
         {
             _db = db;
