@@ -56,8 +56,13 @@ namespace Ders26_Api.Controllers
         {
             return "çalıştı";
         }
-      
-
+        [HttpGet]
+        public List<Urun> GetUrunler()
+        {
+            DbHelper dbHelper = new DbHelper();
+            var urunler = dbHelper.UrunListele();
+            return urunler;
+        }
 
     }
 }

@@ -62,7 +62,12 @@ namespace Ders26_Api
         {
             return _db.UrunKategoriler.OrderBy(p => p.Sira).ToList();
         }
-        
+        public List<Urun> UrunListele()
+        {
+            return _db.Urunler.OrderBy(p => p.Sira).ToList();
+        }
+
+
         public UrunKategori GetKategori(int kategoriId)
         {
             return _db.UrunKategoriler.Where(p => p.Id == kategoriId).First();

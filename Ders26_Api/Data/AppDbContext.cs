@@ -13,9 +13,20 @@ namespace Ders26_Api.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            // local
+            //optionsBuilder.UseSqlServer(@"
+            //    Server=localhost;
+            //    DataBase=AlisVerisApi;
+            //    Trusted_Connection=True;
+            //    TrustServerCertificate=True;
+            //");
+
+            // guzelhosting
             optionsBuilder.UseSqlServer(@"
-                Server=SINAN\MSSQLSERVER01;
-                DataBase=AlisVerisApi;
+                Server=ipadresi\MSSQLSERVER2022;
+                Database=veritabanı adı;
+                User Id=kullanıcı adı;
+                Password=şifre;
                 Trusted_Connection=True;
                 TrustServerCertificate=True;
             ");
